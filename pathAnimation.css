@@ -2,6 +2,11 @@
 
 }
 
+.animation-container svg {
+  width: 90%;
+  transform: translateY(-150px);
+}
+
 .animation-container svg path {
   stroke-dasharray: 1378;
   stroke-dashoffset: 1378;
