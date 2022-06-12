@@ -22,6 +22,9 @@
     <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" type="text/css" media="screen"> -->
     <link rel="stylesheet" href="./currily_files/base.36bc9c6537fe.css" type="text/css" media="screen">
     <link rel="stylesheet" href="./pathAnimation.css" type="text/css" media="screen">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
+        integrity="sha512-c42qTSw/wPZ3/5LBzD+Bw5f7bSF2oxou6wEb+I/lqeaKV5FDIfMvvRp772y4jcJLKuGUOpbJMdg/BTl50fJYAw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
     <!-- Bootstrap JavaScript if it is in head -->
 
 
@@ -163,10 +166,38 @@
                 </div>
 
                 <div class="animation-container">
-                    <svg viewBox="0 0 1078 449" fill="none"
-                        xmlns="http://www.w3.org/2000/svg">
+                    <div id="animation-steps">
+                        <div class="step-item animate__animated animate__faster">
+                            <div style="position: relative;">
+                                <span>1</span>
+                                <div class="dot-box"></div>
+                                <h5><b>Lorem ipsum dolor</b></h5>
+                                <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Numquam recusandae
+                                    repellendus debitis sit ut fugiat.</p>
+                            </div>
+                        </div>
+                        <div class="step-item animate__animated animate__faster">
+                            <div style="position: relative;">
+                                <span>2</span>
+                                <div class="dot-box"></div>
+                                <h5><b>Lorem ipsum dolor</b></h5>
+                                <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Numquam recusandae
+                                    repellendus debitis sit ut fugiat.</p>
+                            </div>
+                        </div>
+                        <div class="step-item animate__animated animate__faster">
+                            <div style="position: relative;">
+                                <span>3</span>
+                                <div class="dot-box"></div>
+                                <h5><b>Lorem ipsum dolor</b></h5>
+                                <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Numquam recusandae
+                                    repellendus debitis sit ut fugiat.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <svg viewBox="0 0 1320 549" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <g filter="url(#filter0_d_1_319)">
-                            <path
+                            <path id="curve-path"
                                 d="M27 311C75.3379 346 187.925 412 251.57 396C331.126 376 350.763 273 473.622 249C596.481 225 686.611 308.5 781.776 188C876.941 67.5003 923.265 -11.4997 1051.16 5.50027"
                                 stroke="#081B4A" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" />
                         </g>
@@ -482,7 +513,7 @@
 
 
 
-
+    <script src="./pathAnimation.js"></script>
 
 
 </body>

@@ -1,17 +1,22 @@
 .animation-container {
-
+  position: relative;
+  margin: 0;
+  padding: 0;
+  transform: translateY(-120px);
 }
 
 .animation-container svg {
-  width: 90%;
-  transform: translateY(-150px);
+  width: 100%;
+  /* transform: translateY(-150px); */
 }
 
 .animation-container svg path {
-  stroke-dasharray: 1378;
-  stroke-dashoffset: 1378;
-  -webkit-animation: dash 5s linear forwards;
-  animation: dash 4s linear forwards infinite;
+  stroke-dasharray: 1320;
+  stroke-dashoffset: 1320;
+}
+
+.animation-container.run svg path {
+  animation: dash 4.5s linear forwards;
 }
 
 @-webkit-keyframes dash {
@@ -24,4 +29,58 @@
   to {
     stroke-dashoffset: 0;
   }
+}
+
+/* #obj {
+  background: blue;
+  width: 20px;
+  height: 20px;
+  border-radius: 10px;
+  position: absolute;
+  top: -10px;
+  left: -10px;
+  opacity: 0.5;
+} */
+
+.dot-box {
+  width: 64px;
+  height: 64px;
+  border-radius: 20px;
+  background: #fff;
+  box-shadow: 0px 0px 12px 0px rgba(128, 128, 128, 0.7);
+  position: relative;
+  margin-bottom: 15px;
+}
+
+.dot-box::after {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  content: "";
+  width: 23px;
+  height: 23px;
+  background-color: #081B4A;
+  border-radius: 50%;
+}
+
+.step-item {
+  position: absolute;
+  top: -32px;
+  left: -32px;
+  width: 280px;
+  opacity: 0;
+}
+.step-item *{
+  z-index: 5
+}
+
+.step-item span {
+  position: absolute;
+  top: 0;
+  right: 0;
+  font-size: 204px;
+  font-weight: 800;
+  z-index: 1;
+  color: rgba(8, 27, 74, 0.05);
+  transform: translateY(-80px);
 }
