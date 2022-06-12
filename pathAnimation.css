@@ -1,0 +1,22 @@
+.animation-container {
+
+}
+
+.animation-container svg path {
+  stroke-dasharray: 1378;
+  stroke-dashoffset: 1378;
+  -webkit-animation: dash 5s linear forwards;
+  animation: dash 4s linear forwards infinite;
+}
+
+@-webkit-keyframes dash {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes dash {
+  to {
+    stroke-dashoffset: 0;
+  }
+}

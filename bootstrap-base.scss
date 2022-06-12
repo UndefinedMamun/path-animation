@@ -1,0 +1,34 @@
+@import 'bootstrap/_functions';
+
+$light-blue: tint-color(#e6f5fc, 30%);
+$blue: #081b4a;
+$purple: #7047ea;
+$turquoise: #8cecf2;
+
+
+$navbar-light-color: $blue;
+$navbar-light-hover-color: $purple;
+$navbar-light-active-color: $purple;
+
+$btn-border-radius: 1rem;
+$btn-border-radius-sm: 1.5rem;
+
+$list-inline-padding: 0px;
+$body-color: $blue;
+
+
+$font-family-sans-serif: 'Gilroy';
+$font-family-bold: 'Gilroy-Bold';
+
+$custom-theme-colors: (
+        "blue": $blue,
+        "light-blue": $light-blue,
+        "turquoise": $turquoise,
+        "purple": $purple
+);
+
+@import 'bootstrap/_variables';
+
+$theme-colors: map-merge($theme-colors, $custom-theme-colors);
+
+@import 'bootstrap/bootstrap';
