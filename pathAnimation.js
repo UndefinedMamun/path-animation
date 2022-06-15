@@ -1,11 +1,54 @@
-var animationContainer = document.querySelector('.animation-container');
-var path = document.getElementById('curve-path')
+/// <reference path="./jquery-3.6.0.js" />
+
+var animationContainer = document.querySelector('#path-animation');
 var steps = document.getElementById('animation-steps')
-console.log({path});
-var obj = document.getElementById('obj');
+var path = document.getElementById('curve-path')
+const svg = $(animationContainer).children("svg")[0];
+
+// calculating the width
+const width = animationContainer.offsetWidth;
+$(animationContainer).css("height", "100vh");
+const height = animationContainer.offsetHeight;
+
+// containerTop = () => $(animationContainer).offset().top - 191.578125;
+const getTop = () => $(".sticky").offset().top;
+containerTop = getTop();
+
+
+
+$(path).css("stroke-dasharray", width);
+$(path).css("stroke-dashoffset", width);
+$(svg).attr("viewBox", `0 0 ${width} 400`);
 
 var pathLength = Math.floor(path.getTotalLength());
-console.log(pathLength)
+$(animationContainer).css("min-height", `${pathLength}px`);
+
+console.log({ width, height, containerTop: getTop(), pathLength })
+
+jQuery(function () {
+  console.log("ready!");
+  $(window).on('scroll', (e) => {
+    const y = window.scrollY;
+    const wrapperTop = containerTop;
+    const distance = y - containerTop;
+
+    console.log({ y, wrapperTop });
+
+    if (wrapperTop < y && distance <= pathLength) {
+      $($(".sticky")[0]).css("position", "sticky");
+    } else {
+      $($(".sticky")[0]).css("position", "static");
+    }
+
+    if (wrapperTop < y && distance <= pathLength) { // start animation
+      const percent = (100 * distance) / pathLength;
+
+      renderPath(percent)
+    } else {
+      renderPath(0);
+    }
+  })
+})
 
 function moveObj(prcnt, element) {
   prcnt = (prcnt * pathLength) / 100;
@@ -20,66 +63,27 @@ function moveObj(prcnt, element) {
 }
 
 
+function renderPath(percentage) {
+  $(path).animate({ "stroke-dashoffset": width - Math.round((width * percentage) / 100) }, 0)
 
-var animationTimer = false;
-function animationHandler(prcnt) {
-  moveObj(prcnt);
-  
-  if(prcnt < 100)
-  {
-    animationTimer = setTimeout(function() {
-      animationHandler(prcnt+1);
-    },20)
+  if (percentage > 19) {
+    moveObj(20, steps.children[0]);
+  } else {
+    $(steps.children[0]).removeClass("animate__fadeIn")
   }
-  else
-  {
-    animationTimer = setTimeout(function() { 
-      animationHandler(0);
-    }, 20);
-  }
-}
 
-function anim() {
-  if(animationTimer) {
-    clearTimeout(animationTimer);
-    animationTimer = false;
+  if (percentage > 59) {
+    moveObj(60, steps.children[1]);
+  } else {
+    $(steps.children[1]).removeClass("animate__fadeIn")
   }
-  else
-  {
-    animationTimer = animationHandler(0);
+  if (percentage > 94) {
+    moveObj(95, steps.children[2]);
+  } else {
+    $(steps.children[2]).removeClass("animate__fadeIn")
   }
 }
-// Initialize
-// moveObj(20);
 
-
-function start() {
-  const DURATION = 4000;
-  console.log('draw start')
-  animationContainer.classList.add('run');
-
-  let percentage = 0;
-  let interval = setInterval(() => {
-    percentage++;
-    console.log(percentage);
-
-    if (percentage === 20) {
-      moveObj(percentage, steps.children[0]);
-    }
-    if (percentage === 60) {
-      moveObj(percentage, steps.children[1]);
-    }
-    if (percentage === 95) {
-      moveObj(percentage, steps.children[2]);
-    }
-  }, DURATION/100);
-
-  setTimeout(() => {
-    clearInterval(interval);
-    console.log('draw done')
-  }, DURATION);
-}
-
-setTimeout(() => {
-  start();
-}, 1000);
+// setTimeout(() => {
+//   start();
+// }, 1000);

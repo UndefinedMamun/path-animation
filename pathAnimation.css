@@ -1,8 +1,20 @@
+html, body{
+  width: 100%;
+
+}
+
+.sticky{
+  /* position: sticky; */
+  top: 0;
+  z-index: 500;
+  background-color: white;
+}
+
 .animation-container {
   position: relative;
   margin: 0;
   padding: 0;
-  transform: translateY(-120px);
+  /* transform: translateY(-120px); */
 }
 
 .animation-container svg {
@@ -10,13 +22,10 @@
   /* transform: translateY(-150px); */
 }
 
-.animation-container svg path {
-  stroke-dasharray: 1320;
-  stroke-dashoffset: 1320;
-}
+
 
 .animation-container.run svg path {
-  animation: dash 4.5s linear forwards;
+  /* animation: dash 4.5s linear forwards; */
 }
 
 @-webkit-keyframes dash {
