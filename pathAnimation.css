@@ -3,53 +3,34 @@ html, body{
 
 }
 
-.sticky{
-  /* position: sticky; */
-  top: 0;
-  z-index: 500;
-  background-color: white;
+/* .sticky{
+  overflow: hidden;
+} */
+
+.sticky-view {
+  position: relative;
+  height: 200vh;
 }
 
-.animation-container {
+.sticky-view-sticky {
+  position: sticky;
+  top: 0;
+  width: 100%;
+  display: flex;
+  height: 100vh;
+  flex-direction: column;
+  justify-content: center;
+}
+
+#path-animation {
   position: relative;
   margin: 0;
   padding: 0;
-  /* transform: translateY(-120px); */
 }
 
 .animation-container svg {
   width: 100%;
-  /* transform: translateY(-150px); */
 }
-
-
-
-.animation-container.run svg path {
-  /* animation: dash 4.5s linear forwards; */
-}
-
-@-webkit-keyframes dash {
-  to {
-    stroke-dashoffset: 0;
-  }
-}
-
-@keyframes dash {
-  to {
-    stroke-dashoffset: 0;
-  }
-}
-
-/* #obj {
-  background: blue;
-  width: 20px;
-  height: 20px;
-  border-radius: 10px;
-  position: absolute;
-  top: -10px;
-  left: -10px;
-  opacity: 0.5;
-} */
 
 .dot-box {
   width: 64px;

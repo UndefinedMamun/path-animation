@@ -7,11 +7,11 @@ const svg = $(animationContainer).children("svg")[0];
 
 // calculating the width
 const width = animationContainer.offsetWidth;
-$(animationContainer).css("height", "100vh");
 const height = animationContainer.offsetHeight;
 
 // containerTop = () => $(animationContainer).offset().top - 191.578125;
-const getTop = () => $(".sticky").offset().top;
+// const getTop = () => $(animationContainer).offset().top;
+const getTop = () => $($('.sticky')[0]).offset().top - 100;
 containerTop = getTop();
 
 
@@ -21,12 +21,11 @@ $(path).css("stroke-dashoffset", width);
 $(svg).attr("viewBox", `0 0 ${width} 400`);
 
 var pathLength = Math.floor(path.getTotalLength());
-$(animationContainer).css("min-height", `${pathLength}px`);
+// $(animationContainer).css("min-height", `${pathLength}px`);
 
 console.log({ width, height, containerTop: getTop(), pathLength })
 
 jQuery(function () {
-  console.log("ready!");
   $(window).on('scroll', (e) => {
     const y = window.scrollY;
     const wrapperTop = containerTop;
@@ -34,16 +33,10 @@ jQuery(function () {
 
     console.log({ y, wrapperTop });
 
-    if (wrapperTop < y && distance <= pathLength) {
-      $($(".sticky")[0]).css("position", "sticky");
-    } else {
-      $($(".sticky")[0]).css("position", "static");
-    }
-
-    if (wrapperTop < y && distance <= pathLength) { // start animation
+    if (wrapperTop < y) { // start animation
       const percent = (100 * distance) / pathLength;
 
-      renderPath(percent)
+      renderPath(percent < 100 ? percent : 100)
     } else {
       renderPath(0);
     }
@@ -84,6 +77,3 @@ function renderPath(percentage) {
   }
 }
 
-// setTimeout(() => {
-//   start();
-// }, 1000);
