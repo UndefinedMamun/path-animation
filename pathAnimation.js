@@ -11,14 +11,14 @@ const height = animationContainer.offsetHeight;
 
 // containerTop = () => $(animationContainer).offset().top - 191.578125;
 // const getTop = () => $(animationContainer).offset().top;
-const getTop = () => $($('.sticky')[0]).offset().top - 100;
+const getTop = () => $($('.sticky')[0]).offset().top - 170;
 containerTop = getTop();
 
 
 
 $(path).css("stroke-dasharray", width);
 $(path).css("stroke-dashoffset", width);
-$(svg).attr("viewBox", `0 0 ${width} 400`);
+$(svg).attr("viewBox", `0 0 ${width} 600`);
 
 var pathLength = Math.floor(path.getTotalLength());
 // $(animationContainer).css("min-height", `${pathLength}px`);
