@@ -3,6 +3,18 @@ html, body{
 
 }
 
+
+/* .gradient-right {
+  background: radial-gradient(circle at 80% 70%, #f1edfd 5%, transparent 55%), radial-gradient(circle at 100% 70%, #f4fdfe 15%, transparent 55%);
+} */
+
+.animation-bg {
+  background-image: url("bg.svg");
+  background-position: right center;
+  background-repeat: no-repeat;
+  background-size: auto;
+}
+
 /* .sticky{
   overflow: hidden;
 } */

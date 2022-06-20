@@ -6,41 +6,41 @@ var path = document.getElementById('curve-path')
 const svg = $(animationContainer).children("svg")[0];
 
 // calculating the width
-const width = animationContainer.offsetWidth;
-const height = animationContainer.offsetHeight;
+var width = animationContainer.offsetWidth;
+var height = animationContainer.offsetHeight;
 
-// containerTop = () => $(animationContainer).offset().top - 191.578125;
-// const getTop = () => $(animationContainer).offset().top;
 const getTop = () => $($('.sticky')[0]).offset().top - 170;
-containerTop = getTop();
-
-
+var containerTop = getTop();
 
 $(path).css("stroke-dasharray", width);
 $(path).css("stroke-dashoffset", width);
-$(svg).attr("viewBox", `0 0 ${width} 600`);
+$(svg).attr("viewBox", `0 0 ${width} 449`);
 
 var pathLength = Math.floor(path.getTotalLength());
 // $(animationContainer).css("min-height", `${pathLength}px`);
 
 console.log({ width, height, containerTop: getTop(), pathLength })
 
+function resize () {
+  // calculating the width
+  width = animationContainer.offsetWidth;
+  height = animationContainer.offsetHeight;
+  containerTop = getTop();
+
+  $(path).css("stroke-dasharray", width);
+  $(path).css("stroke-dashoffset", width);
+  $(svg).attr("viewBox", `0 0 ${width} 449`);
+
+  pathLength = Math.floor(path.getTotalLength());
+  // $(animationContainer).css("min-height", `${pathLength}px`);
+
+  console.log({ width, height, containerTop: getTop(), pathLength })
+}
+
 jQuery(function () {
-  $(window).on('scroll', (e) => {
-    const y = window.scrollY;
-    const wrapperTop = containerTop;
-    const distance = y - containerTop;
-
-    console.log({ y, wrapperTop });
-
-    if (wrapperTop < y) { // start animation
-      const percent = (100 * distance) / pathLength;
-
-      renderPath(percent < 100 ? percent : 100)
-    } else {
-      renderPath(0);
-    }
-  })
+  draw();
+  $(window).on('scroll', (e) => draw())
+  $(window).on('resize', (e) => console.log("called"))
 })
 
 function moveObj(prcnt, element) {
@@ -59,21 +59,37 @@ function moveObj(prcnt, element) {
 function renderPath(percentage) {
   $(path).animate({ "stroke-dashoffset": width - Math.round((width * percentage) / 100) }, 0)
 
-  if (percentage > 19) {
+  if (percentage > 15) {
     moveObj(20, steps.children[0]);
   } else {
     $(steps.children[0]).removeClass("animate__fadeIn")
   }
 
-  if (percentage > 59) {
+  if (percentage > 53) {
     moveObj(60, steps.children[1]);
   } else {
     $(steps.children[1]).removeClass("animate__fadeIn")
   }
-  if (percentage > 90) {
-    moveObj(91, steps.children[2]);
+  if (percentage > 83) {
+    moveObj(90, steps.children[2]);
   } else {
     $(steps.children[2]).removeClass("animate__fadeIn")
+  }
+}
+
+function draw() {
+  const y = window.scrollY;
+  const wrapperTop = containerTop;
+  const distance = y - containerTop;
+
+  console.log({ y, wrapperTop });
+
+  if (wrapperTop < y) { // start animation
+    const percent = (100 * distance) / pathLength;
+
+    renderPath(percent < 100 ? percent : 100)
+  } else {
+    renderPath(0);
   }
 }
 
