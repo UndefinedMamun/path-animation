@@ -3,6 +3,17 @@ html, body{
 
 }
 
+#obj {
+  background: blue;
+  width: 20px;
+  height: 20px;
+  border-radius: 10px;
+  position: absolute;
+  /* Align center */
+  top:-10px;
+  left: -10px;
+  opacity: 0.5;
+}
 
 /* .gradient-right {
   background: radial-gradient(circle at 80% 70%, #f1edfd 5%, transparent 55%), radial-gradient(circle at 100% 70%, #f4fdfe 15%, transparent 55%);
@@ -41,7 +52,12 @@ html, body{
 }
 
 .animation-container svg {
-  width: 100%;
+  max-width: 100%;
+}
+
+#curve-path {
+  stroke-dasharray: 1194;
+  stroke-dashoffset: 1194;
 }
 
 .dot-box {
@@ -67,14 +83,24 @@ html, body{
 
 .step-item {
   position: absolute;
-  top: -32px;
-  left: -32px;
+  /* top: -32px;
+  left: -32px; */
   width: 280px;
   opacity: 0;
 }
 .step-item *{
-  z-index: 5
+  z-index: 5;
 }
+/* test */
+.step-item>div *{
+  display: none;
+}
+
+.step-item .dot-box {
+  display: block;
+  margin-bottom: 0;
+}
+/* test */
 
 .step-item span {
   position: absolute;
@@ -87,17 +113,26 @@ html, body{
   transform: translateY(-80px);
 }
 
-@media only screen and (max-width: 1399px) {
+@media only screen and (max-width: 1319px) {
 
   .step-item {
     width: 150px;
+    font-size: 12px;
+  }
+
+  .step-item h5{
+    font-size: 16px;
+  }
+
+  .dot-box {
+    transform: scale(0.7) translateX(-30%);
   }
   
+  
   .step-item span {
-    font-size: 150px;
-    font-weight: 800;
-    z-index: 1;
-    color: rgba(8, 27, 74, 0.05);
-    transform: translateY(-80px);
+    font-size: 10rem;
+    top: unset;
+    bottom: 0;
+    transform: translateY(0px);
   }
 }

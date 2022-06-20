@@ -1,5 +1,8 @@
 /// <reference path="./jquery-3.6.0.js" />
 
+var obj = document.getElementById('obj');
+
+const MaxPathLength = 1194;
 var animationContainer = document.querySelector('#path-animation');
 var steps = document.getElementById('animation-steps')
 var path = document.getElementById('curve-path')
@@ -9,33 +12,15 @@ const svg = $(animationContainer).children("svg")[0];
 var width = animationContainer.offsetWidth;
 var height = animationContainer.offsetHeight;
 
-const getTop = () => $($('.sticky')[0]).offset().top - 170;
+const getTop = () => $($('.sticky')[0]).offset().top - 200;
 var containerTop = getTop();
 
-$(path).css("stroke-dasharray", width);
-$(path).css("stroke-dashoffset", width);
-$(svg).attr("viewBox", `0 0 ${width} 449`);
+// if(width < 1320)
 
 var pathLength = Math.floor(path.getTotalLength());
 // $(animationContainer).css("min-height", `${pathLength}px`);
 
 console.log({ width, height, containerTop: getTop(), pathLength })
-
-function resize () {
-  // calculating the width
-  width = animationContainer.offsetWidth;
-  height = animationContainer.offsetHeight;
-  containerTop = getTop();
-
-  $(path).css("stroke-dasharray", width);
-  $(path).css("stroke-dashoffset", width);
-  $(svg).attr("viewBox", `0 0 ${width} 449`);
-
-  pathLength = Math.floor(path.getTotalLength());
-  // $(animationContainer).css("min-height", `${pathLength}px`);
-
-  console.log({ width, height, containerTop: getTop(), pathLength })
-}
 
 jQuery(function () {
   draw();
@@ -58,24 +43,26 @@ function moveObj(prcnt, element) {
 
 
 function renderPath(percentage) {
-  $(path).animate({ "stroke-dashoffset": width - Math.round((width * percentage) / 100) }, 0)
+  const w = MaxPathLength;
+  $(path).animate({ "stroke-dashoffset": w - Math.round((w * percentage) / 100) }, 0)
 
-  if (percentage > 15) {
-    moveObj(20, steps.children[0]);
-  } else {
-    $(steps.children[0]).removeClass("animate__fadeIn").css("display", "none")
-  }
+  // if (percentage > 15) {
+  //   moveObj(20, steps.children[0]);
+  // } else {
+  //   $(steps.children[0]).removeClass("animate__fadeIn").css("display", "none")
+  // }
 
-  if (percentage > 53) {
-    moveObj(60, steps.children[1]);
-  } else {
-    $(steps.children[1]).removeClass("animate__fadeIn").css("display", "none")
-  }
-  if (percentage > 83) {
-    moveObj(90, steps.children[2]);
-  } else {
-    $(steps.children[2]).removeClass("animate__fadeIn").css("display", "none")
-  }
+  // if (percentage > 53) {
+  //   moveObj(60, steps.children[1]);
+  // } else {
+  //   $(steps.children[1]).removeClass("animate__fadeIn").css("display", "none")
+  // }
+  // if (percentage > 83) {
+  //   moveObj(90, steps.children[2]);
+  // } else {
+  //   $(steps.children[2]).removeClass("animate__fadeIn").css("display", "none")
+  // }
+  moveObj(percentage, obj)
 }
 
 function draw() {
