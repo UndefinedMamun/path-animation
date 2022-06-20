@@ -74,3 +74,18 @@ html, body{
   color: rgba(8, 27, 74, 0.05);
   transform: translateY(-80px);
 }
+
+@media only screen and (max-width: 1399px) {
+
+  .step-item {
+    width: 150px;
+  }
+  
+  .step-item span {
+    font-size: 150px;
+    font-weight: 800;
+    z-index: 1;
+    color: rgba(8, 27, 74, 0.05);
+    transform: translateY(-80px);
+  }
+}

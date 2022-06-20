@@ -70,8 +70,8 @@ function renderPath(percentage) {
   } else {
     $(steps.children[1]).removeClass("animate__fadeIn")
   }
-  if (percentage > 94) {
-    moveObj(95, steps.children[2]);
+  if (percentage > 90) {
+    moveObj(91, steps.children[2]);
   } else {
     $(steps.children[2]).removeClass("animate__fadeIn")
   }
