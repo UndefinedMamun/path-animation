@@ -51,6 +51,7 @@ function moveObj(prcnt, element) {
   pt.x = Math.round(pt.x);
   pt.y = Math.round(pt.y);
 
+  $(element).css("display", "block")
   element.style.webkitTransform = 'translate3d(' + pt.x + 'px,' + pt.y + 'px, 0)';
   element.classList.add("animate__fadeIn")
 }
@@ -62,29 +63,27 @@ function renderPath(percentage) {
   if (percentage > 15) {
     moveObj(20, steps.children[0]);
   } else {
-    $(steps.children[0]).removeClass("animate__fadeIn")
+    $(steps.children[0]).removeClass("animate__fadeIn").css("display", "none")
   }
 
   if (percentage > 53) {
     moveObj(60, steps.children[1]);
   } else {
-    $(steps.children[1]).removeClass("animate__fadeIn")
+    $(steps.children[1]).removeClass("animate__fadeIn").css("display", "none")
   }
   if (percentage > 83) {
     moveObj(90, steps.children[2]);
   } else {
-    $(steps.children[2]).removeClass("animate__fadeIn")
+    $(steps.children[2]).removeClass("animate__fadeIn").css("display", "none")
   }
 }
 
 function draw() {
   const y = window.scrollY;
-  const wrapperTop = containerTop;
   const distance = y - containerTop;
+  console.log({ width, height, containerTop, pathLength, y })
 
-  console.log({ y, wrapperTop });
-
-  if (wrapperTop < y) { // start animation
+  if (containerTop < y) { // start animation
     const percent = (100 * distance) / pathLength;
 
     renderPath(percent < 100 ? percent : 100)
