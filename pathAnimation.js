@@ -21,8 +21,8 @@ var animationDone = false;
 
 jQuery(function () {
   draw();
-  $(window).on('scroll', (e) => draw())
-  $(window).on('resize', (e) => draw())
+  $(window).on('scroll', (e) => requestAnimationFrame(draw))
+  $(window).on('resize', (e) => requestAnimationFrame(draw))
 })
 
 function moveObj(prcnt, element) {

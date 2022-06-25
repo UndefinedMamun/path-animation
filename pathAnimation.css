@@ -25,29 +25,29 @@ html, body{
 .animation-bg {
   position: relative;
   --right: 0px;
-  --width: 450px;
+  --size: 450px;
 }
 
 .animation-bg::before, .animation-bg::after{
   content: "";
   position: absolute;
-  width: var(--width);
-  height: var(--width);
+  width: var(--size);
+  height: var(--size);
   transform: rotate(22.86deg);
   top: 0;
-  filter: blur(calc(var(--width) / 2));
+  filter: blur(calc(var(--size) / 2));
   z-index: 0;
 }
 
 .animation-bg::before {
   background: rgba(140, 236, 242, 0.6);
-  right: calc(var(--right) - var(--width)/3);
+  right: calc(var(--right) - var(--size)/3);
 }
 
 .animation-bg::after {
   background: rgba(155, 126, 240, 0.5);
-  top: calc(calc(var(--width) / 2) + 50px);
-  right: calc(var(--right) + var(--width)/3);
+  top: calc(calc(var(--size) / 2) + 50px);
+  right: calc(var(--right) + var(--size)/3);
 }
 
 
