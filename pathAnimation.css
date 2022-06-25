@@ -3,36 +3,59 @@ html, body{
 
 }
 
-#obj {
+.sticky{
+  --minHeight: 900px;
+}
+
+/* #obj {
   background: blue;
   width: 20px;
   height: 20px;
   border-radius: 10px;
   position: absolute;
-  /* Align center */
   top:-10px;
   left: -10px;
   opacity: 0.5;
-}
+} */
 
 /* .gradient-right {
   background: radial-gradient(circle at 80% 70%, #f1edfd 5%, transparent 55%), radial-gradient(circle at 100% 70%, #f4fdfe 15%, transparent 55%);
 } */
 
 .animation-bg {
-  background-image: url("bg.svg");
-  background-position: right center;
-  background-repeat: no-repeat;
-  background-size: auto;
+  position: relative;
+  --right: 0px;
+  --width: 450px;
 }
 
-/* .sticky{
-  overflow: hidden;
-} */
+.animation-bg::before, .animation-bg::after{
+  content: "";
+  position: absolute;
+  width: var(--width);
+  height: var(--width);
+  transform: rotate(22.86deg);
+  top: 0;
+  filter: blur(calc(var(--width) / 2));
+  z-index: 0;
+}
+
+.animation-bg::before {
+  background: rgba(140, 236, 242, 0.6);
+  right: calc(var(--right) - var(--width)/3);
+}
+
+.animation-bg::after {
+  background: rgba(155, 126, 240, 0.5);
+  top: calc(calc(var(--width) / 2) + 50px);
+  right: calc(var(--right) + var(--width)/3);
+}
+
+
 
 .sticky-view {
   position: relative;
   height: 200vh;
+  min-height: var(--minHeight);
 }
 
 .sticky-view-sticky {
@@ -41,6 +64,7 @@ html, body{
   width: 100%;
   display: flex;
   height: 100vh;
+  min-height: var(--minHeight);
   flex-direction: column;
   justify-content: center;
 }
@@ -49,6 +73,8 @@ html, body{
   position: relative;
   margin: 0;
   padding: 0;
+  transform: translateY(-70px);
+  z-index: 10;
 }
 
 .animation-container svg {
@@ -83,24 +109,14 @@ html, body{
 
 .step-item {
   position: absolute;
-  /* top: -32px;
-  left: -32px; */
-  width: 280px;
+  top: -32px;
+  left: -32px;
+  width: 250px;
   opacity: 0;
 }
 .step-item *{
   z-index: 5;
 }
-/* test */
-.step-item>div *{
-  display: none;
-}
-
-.step-item .dot-box {
-  display: block;
-  margin-bottom: 0;
-}
-/* test */
 
 .step-item span {
   position: absolute;
@@ -116,8 +132,9 @@ html, body{
 @media only screen and (max-width: 1319px) {
 
   .step-item {
-    width: 150px;
+    width: 130px;
     font-size: 12px;
+    left: -20px;
   }
 
   .step-item h5{
@@ -126,6 +143,12 @@ html, body{
 
   .dot-box {
     transform: scale(0.7) translateX(-30%);
+
+  }
+
+  .animation-bg::before, .animation-bg::after {
+    right: 0 !important;
+    transform: rotate(0deg);
   }
   
   

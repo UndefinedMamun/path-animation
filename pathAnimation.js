@@ -1,74 +1,86 @@
 /// <reference path="./jquery-3.6.0.js" />
 
-var obj = document.getElementById('obj');
-
 const MaxPathLength = 1194;
+const Threshold = 200; // in px; greater means the path will start drawing before we hit it.
 var animationContainer = document.querySelector('#path-animation');
 var steps = document.getElementById('animation-steps')
-var path = document.getElementById('curve-path')
-const svg = $(animationContainer).children("svg")[0];
+var path = document.getElementById('curve-path');
+var stickyView = document.getElementById('stickyView');
+const svg = $("#path-svg");
+// adjusting the dynamic height
+$(stickyView).css({ "height": `calc(100vh + ${MaxPathLength - Threshold}px)` })
 
-// calculating the width
 var width = animationContainer.offsetWidth;
 var height = animationContainer.offsetHeight;
 
-const getTop = () => $($('.sticky')[0]).offset().top - 200;
+const getTop = () => $($('.sticky')[0]).offset().top - Threshold;
 var containerTop = getTop();
 
-// if(width < 1320)
-
 var pathLength = Math.floor(path.getTotalLength());
-// $(animationContainer).css("min-height", `${pathLength}px`);
-
-console.log({ width, height, containerTop: getTop(), pathLength })
+var animationDone = false;
 
 jQuery(function () {
   draw();
   $(window).on('scroll', (e) => draw())
-  $(window).on('resize', (e) => console.log("called"))
+  $(window).on('resize', (e) => draw())
 })
 
 function moveObj(prcnt, element) {
-  prcnt = (prcnt * pathLength) / 100;
-
+  distance = (prcnt * pathLength) / 100;
   // Get x and y values at a certain point in the line
-  pt = path.getPointAtLength(prcnt);
-  pt.x = Math.round(pt.x);
-  pt.y = Math.round(pt.y);
+  pt = path.getPointAtLength(distance);
+  const x = Math.round((pt.x * svg.width()) / 1078);
+  const y = Math.round((pt.y * svg.height()) / 449);
 
-  $(element).css("display", "block")
-  element.style.webkitTransform = 'translate3d(' + pt.x + 'px,' + pt.y + 'px, 0)';
+  element.style.webkitTransform = 'translate3d(' + x + 'px,' + y + 'px, 0)';
   element.classList.add("animate__fadeIn")
 }
 
 
 function renderPath(percentage) {
   const w = MaxPathLength;
-  $(path).animate({ "stroke-dashoffset": w - Math.round((w * percentage) / 100) }, 0)
+  if (!animationDone) {
+    $(path).animate({ "stroke-dashoffset": w - Math.round((w * percentage) / 100) }, 0);
+    $(".animation-bg").css({ "--right": `${1000 - percentage*10}px` })
+  }
 
-  // if (percentage > 15) {
-  //   moveObj(20, steps.children[0]);
-  // } else {
-  //   $(steps.children[0]).removeClass("animate__fadeIn").css("display", "none")
-  // }
+  if (percentage >= 16 || animationDone) {
+    moveObj(16, steps.children[0]);
+  } else {
+    $(steps.children[0]).removeClass("animate__fadeIn")
+  }
 
-  // if (percentage > 53) {
-  //   moveObj(60, steps.children[1]);
-  // } else {
-  //   $(steps.children[1]).removeClass("animate__fadeIn").css("display", "none")
-  // }
-  // if (percentage > 83) {
-  //   moveObj(90, steps.children[2]);
-  // } else {
-  //   $(steps.children[2]).removeClass("animate__fadeIn").css("display", "none")
-  // }
-  moveObj(percentage, obj)
+  if (percentage >= 55 || animationDone) {
+    moveObj(55, steps.children[1]);
+  } else {
+    $(steps.children[1]).removeClass("animate__fadeIn")
+  }
+  // at 85% bring the element in the view.
+  if (percentage >= 85 || animationDone) {
+    // poisition it at 85% of the length;
+    moveObj(85, steps.children[2]);
+  } else {
+    $(steps.children[2]).removeClass("animate__fadeIn")
+  }
+
+  if (percentage === 100 && !animationDone) {
+    animationDone = true;
+    // fixing the height
+    $(stickyView).css({ "height": `100vh` });
+
+    // Scrolling back the appropriate position
+    window.scrollTo({
+      top: window.scrollY - MaxPathLength + Threshold,
+      left: 0,
+      behavior: 'instant',
+    });
+  }
 }
 
 function draw() {
   const y = window.scrollY;
   const distance = y - containerTop;
-  console.log({ width, height, containerTop, pathLength, y })
+  // console.log({ width, height, containerTop, pathLength, y })
 
   if (containerTop < y) { // start animation
     const percent = (100 * distance) / pathLength;
