@@ -4,9 +4,9 @@ const MaxPathLength = 1194;
 const Threshold = 200; // in px; greater means the path will start drawing before we hit it.
 var animationContainer = document.querySelector('#path-animation');
 var steps = document.getElementById('animation-steps')
+const svg = $("#path-svg");
 var path = document.getElementById('curve-path');
 var stickyView = document.getElementById('stickyView');
-const svg = $("#path-svg");
 // adjusting the dynamic height
 $(stickyView).css({ "height": `calc(100vh + ${MaxPathLength - Threshold}px)` })
 
