@@ -95,6 +95,7 @@ html, body{
   box-shadow: 0px 0px 12px 0px rgba(128, 128, 128, 0.7);
   position: relative;
   margin-bottom: 15px;
+  transform: scale(0);
 }
 
 .dot-box::after {
@@ -113,10 +114,15 @@ html, body{
   top: -32px;
   left: -32px;
   width: 250px;
-  opacity: 0;
 }
+
 .step-item *{
   z-index: 5;
+  transition: .2s ease-out;
+}
+
+.step-item h5, .step-item p {
+  opacity: 0;
 }
 
 .step-item span {
@@ -128,7 +134,62 @@ html, body{
   z-index: 1;
   color: rgba(8, 27, 74, 0.05);
   transform: translateY(-80px);
+  opacity: 0;
+  transition: .2s ease-out;
 }
+
+
+/* Step Items visiblity */
+
+.visible h5, .visible p{
+  animation-name: fade-in-left;
+  animation-duration: 1s;
+  opacity: 1;
+}
+
+.visible span{
+  animation-name: fade-in;
+  animation-duration: 1.5s;
+  opacity: 1;
+}
+
+.visible .dot-box{
+  animation-name: bounce-in;
+  animation-duration: .6s;
+  transform: scale(1);
+}
+
+
+/* Animations Start */
+@keyframes bounce-in {
+  0% {
+    opacity: 1;
+    transform: scale(.3);
+  }
+  60% {
+    opacity: 1;
+    transform: scale(1.05);
+  }
+  100% { transform: scale(1); }
+}
+
+@keyframes fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes fade-in-left {
+  0% {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* Animations End */
 
 @media only screen and (max-width: 1319px) {
 

@@ -33,7 +33,7 @@ function moveObj(prcnt, element) {
   const y = Math.round((pt.y * svg.height()) / 449);
 
   element.style.webkitTransform = 'translate3d(' + x + 'px,' + y + 'px, 0)';
-  element.classList.add("animate__fadeIn")
+  element.classList.add("visible");
 }
 
 
@@ -47,20 +47,20 @@ function renderPath(percentage) {
   if (percentage >= 16 || animationDone) {
     moveObj(16, steps.children[0]);
   } else {
-    $(steps.children[0]).removeClass("animate__fadeIn")
+    $(steps.children[0]).removeClass("visible")
   }
 
   if (percentage >= 55 || animationDone) {
     moveObj(55, steps.children[1]);
   } else {
-    $(steps.children[1]).removeClass("animate__fadeIn")
+    $(steps.children[1]).removeClass("visible")
   }
   // at 85% bring the element in the view.
   if (percentage >= 85 || animationDone) {
     // poisition it at 85% of the length;
     moveObj(85, steps.children[2]);
   } else {
-    $(steps.children[2]).removeClass("animate__fadeIn")
+    $(steps.children[2]).removeClass("visible")
   }
 
   if (percentage === 100 && !animationDone) {
